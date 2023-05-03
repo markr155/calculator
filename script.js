@@ -10,38 +10,51 @@ const opBtns = document.querySelectorAll(".keyOperator");
 
 //computing functions
 //sum
-const sum = (a, b) => a + b;
+const sum = (a, b) => Math.round((a + b) * 1e12) / 1e12;
 //subtract
 const subtract = (a, b) => a - b;
 //multiply
-const multiply = (a, b) => a * b;
+const multiply = (a, b) => Math.round((a * b) * 1e12) / 1e12;
 //divide
 const divide = (a, b) => a / b;
 //operate, (operator, a, b)
 const operate = (op, a, b) => {
+    if(op == '' || a == ''){return b};
+    a = parseFloat(a);
+    b = parseFloat(b);
+
     if(op == '*'){
         return multiply(a, b);
     }else if(op == '/'){
+        if (b == 0){
+            alert("Cannot divide by Zero!");
+            return 0;
+        }
         return divide(a, b);
     }else if(op == '+'){
         return sum(a, b);
     }else if(op == '-'){
         return subtract(a, b);
-    }
+    };
 }
-//math declaration
+//operation declaration
 let currentOperator = '';
-let lastOperator = '';
+let lastOperand = '';
+let newNum = true;
 
 //updates display
 const appendNum = (number) => {
     if (display.textContent == '0') {
-        display.textContent = number;return};
+        display.textContent = number;
+        return};
     display.textContent += number;
 }
 
 //clear key
-clrBtn.addEventListener("click",() => {display.textContent = 0});
+clrBtn.addEventListener("click",() => {
+    display.textContent = 0;
+    lastOperand = '';
+});
 //delete key - returns to 0 eventually
 delBtn.addEventListener("click", () => {
     if(display.textContent.length == 1 || (display.textContent.length == 2 && display.textContent.includes('-'))){
@@ -63,8 +76,30 @@ posNegBtn.addEventListener("click", () => {
 
 //keys 1-9 on click
 numBtns.forEach((button) =>
-    button.addEventListener("click", () => {appendNum(button.textContent)}));
+    button.addEventListener("click", () => {
+        if (newNum == true){
+            display.textContent = button.textContent;
+            newNum = false;
+            return;
+        };
+        appendNum(button.textContent);
+    })
+);
 
 //operator keys
-
-
+opBtns.forEach((button) => {
+    button.addEventListener("click", () => {
+        if (!lastOperand == '') {
+            display.textContent = operate(currentOperator, lastOperand, display.textContent);
+        };
+        currentOperator = button.textContent;
+        lastOperand = display.textContent;
+        newNum = true;
+    });    
+});
+//equals key
+equalsBtn.addEventListener("click", () => {
+    display.textContent = operate(currentOperator, lastOperand, display.textContent);
+    lastOperand = '';
+    newNum = true;
+});
