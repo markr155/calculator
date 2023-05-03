@@ -9,3 +9,15 @@
         . 0 equ
 4. function for changing display on click
 5. link buttons to js
+
+press button e.g. 1
+display updates 1
+
+press operator +
+display operator ( 1 + ) 
+
+press number 2
+update display ( 1 + 2 )
+
+press equal
+update display ( 3 )

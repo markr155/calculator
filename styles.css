@@ -1,3 +1,7 @@
+body {
+  background: #7ea5b85e
+}
+
 .calculator {
     display: flex;
     flex-wrap: wrap;
@@ -7,16 +11,10 @@
     /* height: 400px; */
     margin: 50px auto;
     padding: 20px;
-    background: #eee;
+    background: #eeeeeeac;
     border-radius: 10px;
     box-shadow: 0px 0px 10px #7b7b7b;
   }
-
-  /* .header .footer {
-    display: flex;
-    min-height: 100px;
-    align-items: stretch:
-  } */
 
   .calculator-display {
     flex: 2;
@@ -44,19 +42,12 @@
     border-radius: 10px;
   }
   
+  .calculator-keys button:hover {
+    background-color: #ccc;
+  }
+  
   .calculator-keys button:active {
-    background: #aaa;
+    background-color: #aaa;
   }
-  
-  .key-0, .key-1, .key-2, .key-3, .key-4, .key-5, .key-6, .key-7, .key-8, .key-9 {
-    background: #eee;
-  }
-  
-  .key-add, .key-subtract, .key-multiply, .key-divide {
-    background: #ddd;
-  }
-  
-  .key-equals, .key-clear {
-    background: #f44336;
-    color: #
-  
+
+
